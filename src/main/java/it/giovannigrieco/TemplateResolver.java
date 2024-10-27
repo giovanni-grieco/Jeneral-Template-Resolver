@@ -1,4 +1,5 @@
 package it.giovannigrieco;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,11 +9,12 @@ public class TemplateResolver {
 
     private Template template;
     private Map<String, List<String>> valuesMap;
-    private Map<String, Iterator<String>> valuesIteratorMap;
+    private List<Map<String, String>> combinations;
 
     public TemplateResolver(Template template, List<String> valuesFiles) throws IOException {
         this.template = template;
         this.valuesMap = new HashMap<>();
+        this.combinations = new ArrayList<>();
         for (String valuesFile : valuesFiles) {
             List<String> lines = Files.readAllLines(Path.of(valuesFile));
             String placeholderName = Path.of(valuesFile).getFileName().toString().split("\\.")[0];
@@ -29,42 +31,46 @@ public class TemplateResolver {
         }
     }
 
-    private void initialiseIterators(){
-        valuesIteratorMap = new HashMap<>();
-        for (Map.Entry<String, List<String>> entry : valuesMap.entrySet()) {
-            valuesIteratorMap.put(entry.getKey(), entry.getValue().iterator());
+    private void generateCombinations(List<String> placeholderNames, int depth, Map<String, String> current) {
+        if (depth == placeholderNames.size()) {
+            combinations.add(new HashMap<>(current));
+            return;
+        }
+
+        String placeholderName = placeholderNames.get(depth);
+        List<String> values = valuesMap.get(placeholderName);
+
+        for (String value : values) {
+            current.put(placeholderName, value);
+            generateCombinations(placeholderNames, depth + 1, current);
+            current.remove(placeholderName);
         }
     }
 
     public String generate() {
         StringBuilder result = new StringBuilder();
         result.append("//----------------------------------------------------------\n");
-        result.append("//Generated with Henderson's Config Template Tool\n");
+        result.append("//Generated with Giovanni Pio Grieco's Config Template Tool\n");
         result.append("//----------------------------------------------------------\n");
-        //System.out.println(valuesMap);
-        this.initialiseIterators();
-        int iterationAmount = valuesMap.values().stream().map(List::size).reduce(1, (a, b) -> a * b);
-        System.out.println("Iteration amount: " + iterationAmount);
-        for(int i = 0 ; i < iterationAmount ; i++){
+
+        List<String> placeholderNames = new ArrayList<>(valuesMap.keySet());
+        generateCombinations(placeholderNames, 0, new HashMap<>());
+
+        for (Map<String, String> combination : combinations) {
             String generated = template.getTemplate();
             for (Placeholder placeholder : template.getPlaceholderList()) {
-                if(!valuesIteratorMap.get(placeholder.getName()).hasNext()){
-                    valuesIteratorMap.put(placeholder.getName(), valuesMap.get(placeholder.getName()).iterator());
-                }
-                String valueLine = valuesIteratorMap.get(placeholder.getName()).next();
-                if(placeholder.isArray()){
-                    String[] values = valueLine.split("\\|");
-                    for(int j = 0 ; j < values.length ; j++){
-                        generated = generated.replace("$" + placeholder.getName() + "[" + j + "]$", values[j]);
+                String value = combination.get(placeholder.getName());
+                if (placeholder.isArray()) {
+                    String[] values = value.split("\\|");
+                    for (int i = 0; i < values.length; i++) {
+                        generated = generated.replace("$" + placeholder.getName() + "[" + i + "]$", values[i]);
                     }
-                }else{
-                    generated = generated.replace("$" + placeholder.getName() + "$", valueLine);
+                } else {
+                    generated = generated.replace("$" + placeholder.getName() + "$", value);
                 }
-
             }
             result.append(generated).append("\n");
         }
-
 
         return result.toString();
     }
