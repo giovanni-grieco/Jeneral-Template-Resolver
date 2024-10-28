@@ -103,4 +103,4 @@ This project is licensed under the GPLv3 License.
 
 ## 📬 Contact
 
-For questions or further details, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or further details, please contact [Me](mailto:giovi.5057@gmail.com).
