@@ -7,9 +7,9 @@ import java.util.*;
 
 public class TemplateResolver {
 
-    private Template template;
-    private Map<String, List<String>> valuesMap;
-    private List<Map<String, String>> combinations;
+    private final Template template;
+    private final Map<String, List<String>> valuesMap;
+    private final List<Map<String, String>> combinations;
 
     public TemplateResolver(Template template, List<String> valuesFiles) throws IOException {
         this.template = template;
@@ -50,7 +50,7 @@ public class TemplateResolver {
     public String generate() {
         StringBuilder result = new StringBuilder();
         result.append("//----------------------------------------------------------\n");
-        result.append("//Generated with Giovanni Pio Grieco's Config Template Tool\n");
+        result.append("//Generated with Giovanni Pio Grieco's Template Tool\n");
         result.append("//----------------------------------------------------------\n");
 
         List<String> placeholderNames = new ArrayList<>(valuesMap.keySet());
