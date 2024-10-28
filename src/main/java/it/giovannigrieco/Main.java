@@ -1,3 +1,6 @@
+/*
+    Copyright 2024 Giovanni Pio Grieco
+*/
 package it.giovannigrieco;
 
 import java.io.IOException;
@@ -8,10 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-
-    /*
-        Copyright 2024 Giovanni Pio Grieco
-     */
 
     public static void main(String[] args) throws IOException {
 
