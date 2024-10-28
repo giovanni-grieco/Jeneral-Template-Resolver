@@ -1,7 +1,7 @@
 
 # Jeneral-Template-Resolver
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Status](https://img.shields.io/badge/status-active-brightgreen) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Status](https://img.shields.io/badge/status-active-brightgreen) ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 The **Jeneral-Template-Resolver** allows you to specify templates with placeholder values and replace these placeholders with concrete values provided in dedicated files. This tool reads each line from a placeholder-specific file to generate personalized text outputs.
 
 ---
