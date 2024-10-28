@@ -97,7 +97,7 @@ We welcome contributions! Please follow these steps:
 
 ## 📄 License
 
-This project is licensed under the GPLv3 License.
+This project is licensed under the GPL v3 License.
 
 ---
 
