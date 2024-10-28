@@ -64,6 +64,14 @@ If multiple placeholders exist, each placeholder will be replaced in an iterativ
 
 ---
 
+## 🔧 Requisites
+
+To to run the program, you have to have Java 21 or above installed
+1. Visit [Oracle website](https://www.oracle.com/java/technologies/downloads/#java21)
+2. Download the correct version for your OS
+
+---
+
 ## 🚀 Installation
 
 To install **Jeneral-Template-Resolver**, download the latest binary from the [releases page](https://github.com/giovanni-grieco/Jeneral-Template-Resolver/releases).
