@@ -1,5 +1,0 @@
-class $helmet_type[0]$_$callsign[0]$: Maritime_Cover
-{
-    displayName = "[TFL] $helmet_type[0]$ ($callsign[0]$)";
-    hiddenSelectionsTextures[] = {$callsign[1]$, $helmet_type[1]$};
-};
