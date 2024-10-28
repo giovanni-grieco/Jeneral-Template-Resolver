@@ -1,56 +1,106 @@
+
 # Jeneral-Template-Resolver
-It allows you to specify templates, with placeholder values, and allows for those placeholder values to be replaced with concrete values.
 
-The template resolver will replace the placeholder with concrete values reading each line of the value file.
+![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Status](https://img.shields.io/badge/status-active-brightgreen) ![License](https://img.shields.io/badge/license-MIT-green)
 
-The value file has to have the same name of the placeholder. For example, if a placeholder is called \$myPlaceholder\$ then the value file has to be called myPlaceholder
-Each value file line is relative placeholder concrete value.
+The **Jeneral-Template-Resolver** allows you to specify templates with placeholder values and replace these placeholders with concrete values provided in dedicated files. This tool reads each line from a placeholder-specific file to generate personalized text outputs.
 
-For example if the template is:
-\$p1\$ says hello!
+---
 
-and the value "p1" file has a single line:
-Alice
+## ✨ Features
+- Replace placeholder values in templates effortlessly.
+- Supports multiple value files, iterating over each line to populate placeholders.
+- Easily manage template variations by providing different value files.
 
-the result will be: Alice says hello!
+---
 
-If more lines are provided in the p1 value file then it will iterate on all the different values and generate concrete result from the template
+## 📜 How It Works
 
-For example if the p1 has: Alice, Bob, Charlie
+1. **Define Your Template**  
+   Specify placeholders within your template, such as `$myPlaceholder$`.
 
-then the following result would be: Alice says hello!, Bob says hello!, Charlie says hello!
+2. **Create a Value File**  
+   For each placeholder, create a file with the same name as the placeholder (e.g., `myPlaceholder`), where each line represents a concrete value.
 
-When more than one placeholder is provided in the template, more than one value file has to be provided.
-This implies that the program will generate all the possible combinations of the values provided.
+3. **Generate Output**  
+   The resolver reads from these files and substitutes each placeholder, line-by-line.
 
-For example if the template is:
-\$p1\$ says hello to \$p2\$
+---
 
-And the p1 value file is:
-Alice Bob Eve
+## 🔧 Example
 
-And the p2 value file is:
-Charlie David
+Suppose you have the following **template**:
 
-then the program will generate the following combinations:
-
-Alice says hello to Charlie, Alice says hello to David, Bob says hello to Charlie, Bob says hello to David, Eve says hello to Charlie, Eve says hello to David
-
-Templates can also support array values. A single value file line can have multiple variations for example
-
-Name: \$p1[0]\$   Surname: \$p1[1]\$
-
-and the value file is:
-Alice|Axe,
-Bob|Boggs
-
-the final result will be:
-
-Name: Alice  Surname: Axe 
-
-Name: Bob  Surname: Boggs
-
-## Usage
-```shell script
-java -jar Jeneral-Template-Resolver.jar -t template.txt -v valuesFile1,valuesFile2
+```plaintext
+$p1$ says hello!
 ```
+
+And a **value file** named `p1` containing:
+
+```plaintext
+Alice
+Bob
+Charlie
+```
+
+### Result
+The output will be generated as:
+
+```plaintext
+Alice says hello!
+Bob says hello!
+Charlie says hello!
+```
+
+If multiple placeholders exist, each placeholder will be replaced in an iterative manner based on its corresponding value file.
+
+---
+
+## 📂 File Naming and Placeholder Conventions
+
+- Placeholders in the template must follow the syntax `$placeholderName$`.
+- Each placeholder must have an associated file with the same name as the placeholder (without the `$` symbols).
+  - **Example**: For `$greeting$`, the file should be named `greeting`.
+
+---
+
+## 🚀 Installation
+
+To install **Jeneral-Template-Resolver**, download the latest binary from the [releases page](https://github.com/giovanni-grieco/Jeneral-Template-Resolver/releases).
+
+1. Visit the [Releases](https://github.com/giovanni-grieco/Jeneral-Template-Resolver/releases) page.
+2. Download the jar.
+
+---
+
+## 🛠 Usage
+
+Use the resolver by specifying the template file and the directory containing value files.
+
+### Example Command
+
+```bash
+java -jar mod-config-generator.jar -t path/to/template_file -v path/to/value_file1,path/to/value_file2...
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Submit a pull request with a detailed description of your changes.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 📬 Contact
+
+For questions or further details, please contact [your-email@example.com](mailto:your-email@example.com).
