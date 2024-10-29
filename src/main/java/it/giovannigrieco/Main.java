@@ -1,6 +1,3 @@
-/*
-    Copyright 2024 Giovanni Pio Grieco
-*/
 package it.giovannigrieco;
 
 import java.io.IOException;
