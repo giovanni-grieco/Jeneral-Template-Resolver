@@ -66,9 +66,11 @@ If multiple placeholders exist, each placeholder will be replaced in an iterativ
 
 ## 🔧 Requisites
 
-To to run the program, you have to have Java 21 or above installed
-1. Visit [Oracle website](https://www.oracle.com/java/technologies/downloads/#java21)
+To to run the program, you have to have Java 8 (1.8) or above installed
+1. Visit [Oracle website](https://www.java.com/download/manual.jsp)
 2. Download the correct version for your OS
+3. Install Java
+4. Verify that Java version is 8 (1.8) or above ([Guide](https://www.javatpoint.com/how-to-verify-java-version))
 
 ---
 
