@@ -91,20 +91,22 @@ Charlie says hello to Edward
 
 ### Placeholder array values
 
-For a single line of concrete values, you can specify an array of value variations
+For a single line of concrete values, you can specify an array of value variations. Each value is still defined in a single line but multiple variation in the single line are seperated by a " | " symbol
 
 Suppose you have the following **template**:
 
 ```plaintext
-My name is $p1[0]$ and I love $p1[1]$
+$p1[0]$ and $p1[1]$
 ```
 
 And a **value file** named `p1` containing:
 
 ```plaintext
-Alice|talking to Bob
-HTTP web server|being a teapot
+My name is Alice|I would like to talk to Bob
+I am an HTTP web server|I can't make coffee, I am a teapot
 ```
+
+Notice the "|" pipe symbol splitting the variations of the same value line
 
 
 #### Result
@@ -112,7 +114,7 @@ The output will be generated as:
 
 ```plaintext
 My name is Alice and I love talking to Bob
-My name is HTTP web server and I love being a teapot
+I am an HTTP web server and I can't make coffee, I am a teapot
 ```
 
 ---
