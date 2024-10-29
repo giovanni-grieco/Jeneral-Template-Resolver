@@ -54,6 +54,39 @@ Charlie says hello!
 
 If multiple placeholders exist, each placeholder will be replaced in an iterative manner based on its corresponding value file.
 
+Suppose you have the following **template**:
+
+```plaintext
+$p1$ says hello to $p2$
+```
+
+And a **first value file** named `p1` containing:
+
+```plaintext
+Alice
+Bob
+Charlie
+```
+
+And a **second value file** named `p2` containing:
+
+```plaintext
+David
+Edward
+```
+
+### Result
+The output will be generated as:
+
+```plaintext
+Alice says hello to David
+Alice says hello to Edward
+Bob says hello to David
+Bob says hello to Edward
+Charlie says hello to Edward
+```
+
+
 ---
 
 ## 📂 File Naming and Placeholder Conventions
