@@ -29,6 +29,8 @@ The **Jeneral-Template-Resolver** allows you to specify templates with placehold
 
 ## 🔧 Example
 
+## Single Placeholder
+
 Suppose you have the following **template**:
 
 ```plaintext
@@ -51,6 +53,7 @@ Alice says hello!
 Bob says hello!
 Charlie says hello!
 ```
+## Multiple Placeholders
 
 If multiple placeholders exist, each placeholder will be replaced in an iterative manner based on its corresponding value file.
 
