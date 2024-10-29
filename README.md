@@ -108,9 +108,3 @@ We welcome contributions! Please follow these steps:
 ## 📄 License
 
 This project is licensed under the GPL v3 License.
-
----
-
-## 📬 Contact
-
-For questions or further details, please contact [Me](mailto:giovi.5057@gmail.com).
