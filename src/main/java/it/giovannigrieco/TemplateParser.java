@@ -12,13 +12,11 @@ import java.util.regex.Pattern;
 
 public class TemplateParser {
 
-    private String pathToTemplateFile;
-    private List<String> templateFile;
+    private final List<String> templateFile;
 
     public TemplateParser(String pathToTemplateFile) throws IOException {
-        this.pathToTemplateFile = pathToTemplateFile;
         Path path = Path.of(pathToTemplateFile);
-        templateFile = Files.readAllLines(Path.of(pathToTemplateFile));
+        templateFile = Files.readAllLines(path);
     }
 
     private boolean isPlaceholderArray(String placeholder){

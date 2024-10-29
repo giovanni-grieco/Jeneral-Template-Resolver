@@ -39,10 +39,11 @@ public class Placeholder {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof Placeholder other)) {
+        if (!(obj instanceof Placeholder)) {
             return false;
         }
-        return name.equals(other.name);
+        Placeholder ph = (Placeholder) obj;
+        return name.equals(ph.name);
     }
 
 

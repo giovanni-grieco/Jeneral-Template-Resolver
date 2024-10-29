@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Template {
 
-    private List<Placeholder> placeholderList;
-    private String template;
+    private final List<Placeholder> placeholderList;
+    private final String template;
 
     public Template(String template, List<Placeholder> placeholderList) {
         this.template = template;
