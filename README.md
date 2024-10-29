@@ -89,6 +89,31 @@ Bob says hello to Edward
 Charlie says hello to Edward
 ```
 
+### Placeholder array values
+
+For a single line of concrete values, you can specify an array of value variations
+
+Suppose you have the following **template**:
+
+```plaintext
+My name is $p1[0]$ and I love $p1[1]$
+```
+
+And a **value file** named `p1` containing:
+
+```plaintext
+Alice|talking to Bob
+HTTP web server|being a teapot
+```
+
+
+#### Result
+The output will be generated as:
+
+```plaintext
+My name is Alice and I love talking to Bob
+My name is HTTP web server and I love being a teapot
+```
 
 ---
 
