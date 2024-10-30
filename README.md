@@ -7,14 +7,14 @@ The **Jeneral-Template-Resolver** allows you to specify templates with placehold
 
 ---
 
-## ✨ Features
+## Features
 - Replace placeholder values in templates effortlessly.
 - Supports multiple value files, iterating over each line to populate placeholders.
 - Easily manage template variations by providing different value files.
 
 ---
 
-## 📜 How It Works
+## How It Works
 
 1. **Define Your Template**  
    Specify placeholders within your template, such as `$myPlaceholder$`.
@@ -27,7 +27,7 @@ The **Jeneral-Template-Resolver** allows you to specify templates with placehold
 
 ---
 
-## 🔧 Example
+## Example
 
 ### Single Placeholder
 
@@ -120,7 +120,7 @@ I am an HTTP web server and I can't make coffee, I am a teapot
 
 ---
 
-## 📂 File Naming and Placeholder Conventions
+## File Naming and Placeholder Conventions
 
 - Placeholders in the template must follow the syntax `$placeholderName$`.
 - Each placeholder must have an associated file with the same name as the placeholder (without the `$` symbols).
@@ -128,7 +128,7 @@ I am an HTTP web server and I can't make coffee, I am a teapot
 
 ---
 
-## 🔧 Requisites
+## Requisites
 
 To to run the program, you have to have Java 8 (1.8) or above installed
 1. Visit [Oracle website](https://www.java.com/download/manual.jsp)
@@ -138,7 +138,7 @@ To to run the program, you have to have Java 8 (1.8) or above installed
 
 ---
 
-## 🚀 Installation
+## Installation
 
 To install **Jeneral-Template-Resolver**, download the latest binary from the [releases page](https://github.com/giovanni-grieco/Jeneral-Template-Resolver/releases).
 
@@ -147,7 +147,7 @@ To install **Jeneral-Template-Resolver**, download the latest binary from the [r
 
 ---
 
-## 🛠 Usage
+## Usage
 
 Use the resolver by specifying the template file and the directory containing value files.
 
@@ -159,7 +159,7 @@ java -jar mod-config-generator.jar -t path/to/template_file -v path/to/value_fil
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please follow these steps:
 
@@ -169,6 +169,6 @@ We welcome contributions! Please follow these steps:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the GPL v3 License.
