@@ -20,6 +20,14 @@ public class Template {
         return placeholderList;
     }
 
+    public Placeholder findPlaceholderByName(String placeholderName){
+        for(Placeholder p : placeholderList){
+            if(p.getName().equals(placeholderName))
+                return p;
+        }
+        return null;
+    }
+
     @Override
     public String toString(){
         return "Template: " + template + "\nPlaceholders: " + placeholderList.toString();

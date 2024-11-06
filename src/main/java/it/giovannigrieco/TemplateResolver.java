@@ -4,17 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TemplateResolver {
 
     private final Template template;
     private final Map<String, List<String>> valuesMap;
-    private final List<Map<String, String>> combinations;
 
     public TemplateResolver(Template template, List<String> valuesFiles) throws IOException {
         this.template = template;
         this.valuesMap = new HashMap<>();
-        this.combinations = new ArrayList<>();
         for (String valuesFile : valuesFiles) {
             List<String> lines = Files.readAllLines(Path.of(valuesFile));
             String placeholderName = Path.of(valuesFile).getFileName().toString().split("\\.")[0];
@@ -31,47 +30,73 @@ public class TemplateResolver {
         }
     }
 
-    private void generateCombinations(List<String> placeholderNames, int depth, Map<String, String> current) {
-        if (depth == placeholderNames.size()) {
-            combinations.add(new HashMap<>(current));
-            return;
-        }
 
-        String placeholderName = placeholderNames.get(depth);
-        List<String> values = valuesMap.get(placeholderName);
 
-        for (String value : values) {
-            current.put(placeholderName, value);
-            generateCombinations(placeholderNames, depth + 1, current);
-            current.remove(placeholderName);
-        }
-    }
-
-    public String generate() {
-        StringBuilder result = new StringBuilder();
-        result.append("//----------------------------------------------------------\n");
-        result.append("//Generated with Giovanni Pio Grieco's Template Tool\n");
-        result.append("//----------------------------------------------------------\n");
-
+    public Tree<Value> generateTree(){
+        Tree<Value> tree = new Tree<>();
+        // p1, p2, p3 etc
         List<String> placeholderNames = new ArrayList<>(valuesMap.keySet());
-        generateCombinations(placeholderNames, 0, new HashMap<>());
-
-        for (Map<String, String> combination : combinations) {
-            String generated = template.getTemplate();
-            for (Placeholder placeholder : template.getPlaceholderList()) {
-                String value = combination.get(placeholder.getName());
-                if (placeholder.isArray()) {
-                    String[] values = value.split("\\|");
-                    for (int i = 0; i < values.length; i++) {
-                        generated = generated.replace("$" + placeholder.getName() + "[" + i + "]$", values[i]);
-                    }
-                } else {
-                    generated = generated.replace("$" + placeholder.getName() + "$", value);
+        Stack<TreeCreationStack> stack = new Stack<>();
+        stack.push(new TreeCreationStack(0, tree.getRoot()));
+        //List<Node<Value>> valueNodes = new ArrayList<>();
+        boolean firstLoop = true;
+        while( firstLoop || !stack.isEmpty()){
+            TreeCreationStack tcs = stack.pop();
+            if(tcs.depth != placeholderNames.size()) {
+                Placeholder ph = template.findPlaceholderByName(placeholderNames.get(tcs.depth));
+                List<String> valuesContentList = valuesMap.get(ph.getName());
+                for (String s : valuesContentList) {
+                    Value v = new Value(ph, s);
+                    Node<Value> nv = new Node<>(tcs.nodo, v);
+                    tcs.nodo.addChildren(nv);
+                    stack.push(new TreeCreationStack(tcs.depth+1, nv));
                 }
             }
-            result.append(generated).append("\n");
+            firstLoop=false;
+        }
+        System.out.println(tree);
+        return tree;
+    }
+
+
+    public String generate(){
+        StringBuilder result = new StringBuilder();
+        Tree<Value> tree = generateTree();
+        List<Node<Value>> leafs = tree.getLeafs();
+        Collections.reverse(leafs);
+        for(Node<Value> leaf : leafs){
+            List<Value> lineValues = leaf.pathToRoot().stream().map(Node::getContent).collect(Collectors.toList());
+            Collections.reverse(lineValues);
+            String concreteLine = makeConcreteLine(lineValues);
+            result.append(concreteLine).append("\n");
         }
 
         return result.toString();
+    }
+
+    private String makeConcreteLine(List<Value> lineValues) {
+        String generated = template.getTemplate();
+        for(Value value : lineValues){
+            Placeholder placeholder = value.getPlaceholder();
+            if(placeholder.isArray()){
+                String[] values = value.getConcreteValue().split("\\|");
+                for(int i = 0; i < values.length; i++){
+                    generated = generated.replace("$" + placeholder.getName() + "[" + i + "]$", values[i]);
+                }
+            }else{
+                generated = generated.replace("$" + placeholder.getName() + "$", value.getConcreteValue());
+            }
+        }
+        return generated;
+    }
+
+    private class TreeCreationStack {
+        public int depth;
+        public Node<Value> nodo;
+
+        public TreeCreationStack(int depth, Node<Value> nodo){
+            this.depth=depth;
+            this.nodo=nodo;
+        }
     }
 }
