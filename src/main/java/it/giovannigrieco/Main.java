@@ -37,6 +37,7 @@ public class Main {
                     System.err.println("Error: missing argument for option " + arg);
                     System.exit(1);
                 }
+                continue;
             }
 
             if( arg.equals("--values") || arg.equals("-v") ){
@@ -53,6 +54,7 @@ public class Main {
                     System.err.println("Error: missing argument for option " + arg);
                     System.exit(1);
                 }
+                continue;
             }
 
             if( arg.equals("--output") || arg.equals("-o")){
@@ -65,23 +67,25 @@ public class Main {
                     outputFile = args[i + 1];
                     i++;
                 }
+                continue;
             }
-        }
 
-        if(args.length == 0){
-            System.out.println("No arguments provided");
-            printHelp();
+            System.err.println("Invalid argument passed.");
+            System.err.println("If you need help use --help or -h");
+            System.exit(1);
         }
 
         if(!templateFlag){
             System.err.println("Error: missing template file");
-            printHelp();
+            System.err.println("If you need help use --help or -h");
+            //printHelp();
             System.exit(1);
         }
 
         if(!valuesFlag){
             System.err.println("Error: missing values files");
-            printHelp();
+            System.err.println("If you need help use --help or -h");
+            //printHelp();
             System.exit(1);
         }
 
@@ -104,11 +108,12 @@ public class Main {
     }
 
     private static void printHelp(){
-        System.out.println("Usage: java -jar <jarfile> [options]");
+        System.out.println("Usage: java -jar jtr.jar [options]");
         System.out.println("Options:");
         System.out.println("  --help, -h  Show this help");
         System.out.println("  --template <path>, -t <path>  Path to the template file");
         System.out.println("  --values <path1, path2, ...>, -v <path1, path2, ...>  Paths to the values files");
         System.out.println("  --output <path>, -o <path>  Path to the output file");
+        System.out.println("Usage example: java -jar jtr.jar -t template_file.txt -v value_file1,value_file2 -o output.txt");
     }
 }

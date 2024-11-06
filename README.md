@@ -151,10 +151,10 @@ To install **Jeneral-Template-Resolver**, download the latest binary from the [r
 
 Use the resolver by specifying the template file and the directory containing value files.
 
-### Example Command
+### Example
 
 ```bash
-java -jar mod-config-generator.jar -t path/to/template_file -v path/to/value_file1,path/to/value_file2...
+java -jar jtr.jar -t path/to/template_file -v path/to/value_file1,path/to/value_file2... -o path/to/output_file
 ```
 
 ---
