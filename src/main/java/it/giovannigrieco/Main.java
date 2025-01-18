@@ -112,7 +112,7 @@ public class Main {
         System.out.println("Options:");
         System.out.println("  --help, -h  Show this help");
         System.out.println("  --template <path>, -t <path>  Path to the template file");
-        System.out.println("  --values <path1, path2, ...>, -v <path1, path2, ...>  Paths to the values files");
+        System.out.println("  --values <path1,path2,...>, -v <path1,path2,...>  Paths to the values files");
         System.out.println("  --output <path>, -o <path>  Path to the output file");
         System.out.println("Usage example: java -jar jtr.jar -t template_file.txt -v value_file1,value_file2 -o output.txt");
     }
